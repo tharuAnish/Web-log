@@ -9,9 +9,13 @@ export default function Home() {
     <div className="">
       <Featured />
       <CategoryList />
-      <div className="">
-        <CardList />
-        <Menu />
+      <div className="grid grid-cols-7 gap-4">
+        <div className="col-span-5">
+          <CardList />
+        </div>
+        <div className="col-span-2 mt-28">
+          <Menu />
+        </div>
       </div>
     </div>
   )
