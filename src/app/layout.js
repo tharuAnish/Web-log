@@ -21,7 +21,7 @@ export default function RootLayout({ children }) {
           enableSystem
           disableTransitionOnChange
         >
-          <div className="wrapper px-2 sm:px-4 lg:px-6 min-h-screen">
+          <div className="wrapper px-6 sm:px-8  min-h-screen">
             <Navbar />
             {children}
             <Footer />
