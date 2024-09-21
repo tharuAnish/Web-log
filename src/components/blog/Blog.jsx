@@ -1,6 +1,7 @@
 import Image from "next/image"
 import { FaTags } from "react-icons/fa6"
 import { MdDateRange } from "react-icons/md"
+import Comments from "../comments/Comments"
 
 export default function Blog() {
   return (
@@ -86,6 +87,7 @@ export default function Blog() {
           Author: Namo Anish
         </p>
       </div>
+      <Comments />
     </main>
   )
 }
