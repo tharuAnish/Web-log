@@ -2,17 +2,9 @@ import Image from "next/image"
 import { ModeToggle } from "../theme/toggle"
 import { NavLists } from "./NavItems"
 import { Separator } from "../ui/separator"
+import Logo from "./Logo"
 
 export default function Navbar() {
-  // Define LetterBox component within Navbar
-  const LetterBox = ({ letter }) => {
-    return (
-      <div className="flex items-center  justify-center bg-black h-8 w-8 rounded-md font-bold text-white">
-        {letter}
-      </div>
-    )
-  }
-
   return (
     <nav>
       <div className="flex items-center justify-between  py-3">
@@ -35,25 +27,7 @@ export default function Navbar() {
 
         <div className="flex-1 text-left sm:text-center text-xl font-bold">
           <div className="flex items-center justify-start sm:justify-center gap-1">
-            {/* For smaller screens (before sm) */}
-            <div className="flex sm:hidden items-center justify-left gap-1">
-              <LetterBox letter="W" />
-              {/* <span className="text-black font-bold">-</span> */}
-              <LetterBox letter="L" />
-            </div>
-
-            {/* For sm screens and above */}
-            <div className="hidden sm:flex items-center justify-center gap-1">
-              {["W", "E", "B"].map((letter, index) => (
-                <LetterBox key={index} letter={letter} />
-              ))}
-
-              <span className="text-black font-bold">-</span>
-
-              {["L", "O", "G"].map((letter, index) => (
-                <LetterBox key={index + 3} letter={letter} />
-              ))}
-            </div>
+            <Logo />
           </div>
         </div>
 
