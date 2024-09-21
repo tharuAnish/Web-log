@@ -25,7 +25,7 @@ import AuthLinks from "../authLinks/AuthLinks"
 
 export function NavItems() {
   const pathname = usePathname()
-  const status = "notauthenticated"
+  const status = "authenticated"
 
   const navLinks = [
     ...(status === "authenticated"
