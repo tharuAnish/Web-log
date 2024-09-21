@@ -65,8 +65,8 @@ export function NavItems() {
     ...(status === "notauthenticated"
       ? [
           {
-            name: "Login",
-            path: "/login",
+            name: "Signin",
+            path: "/signin",
             icon: PiPhone,
             activeIcon: PiPhoneFill,
           },

@@ -3,26 +3,22 @@ import { ModeToggle } from "../theme/toggle"
 import { NavLists } from "./NavItems"
 import { Separator } from "../ui/separator"
 import Logo from "./Logo"
+import {
+  FaGlobe,
+  FaLinkedin,
+  FaSquareTwitter,
+  FaXTwitter,
+} from "react-icons/fa6"
 
 export default function Navbar() {
   return (
     <nav>
       <div className="flex items-center justify-between  py-4">
         {/* Social Icons */}
-        <div className="hidden sm:flex flex-1 gap-2">
-          <Image
-            src="/facebook.png"
-            alt="facebook-icon"
-            height={24}
-            width={24}
-          />
-          <Image
-            src="/instagram.png"
-            alt="instagram-icon"
-            height={24}
-            width={24}
-          />
-          <Image src="/youtube.png" alt="youtube-icon" height={24} width={24} />
+        <div className="hidden sm:flex flex-1 items-center gap-4">
+          <FaLinkedin className="h-5 w-5" />
+          <FaXTwitter className="h-5 w-5" />
+          <FaGlobe className="h-5 w-5" />
         </div>
 
         <div className="flex-1 text-left sm:text-center text-xl font-bold">

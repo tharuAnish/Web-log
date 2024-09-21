@@ -7,6 +7,7 @@ import {
   FaTwitter,
 } from "react-icons/fa"
 import Logo from "./Logo"
+import { Button } from "../ui/button"
 
 export default function Footer() {
   return (
@@ -25,20 +26,20 @@ export default function Footer() {
               </label>
 
               <input
-                className="w-full rounded-full border-gray-200 bg-gray-100 p-4 pe-32 text-sm font-medium"
+                className="w-full rounded-full border-gray-200 bg-gray-100 py-3 p-4 pe-32 text-sm font-medium"
                 id="email"
                 type="email"
                 placeholder="john@doe.com"
               />
 
-              <button className="absolute end-1 top-1/2 -translate-y-1/2 rounded-full bg-blue-600 px-5 py-3 text-sm font-medium text-white transition hover:bg-blue-700">
+              <Button className="absolute end-1 top-1/2 -translate-y-1/2 rounded-full  px-5 py-3 text-sm font-medium  transition ">
                 Subscribe
-              </button>
+              </Button>
             </div>
           </form>
         </div>
 
-        <div className="mt-16 grid grid-cols-1 gap-8 lg:grid-cols-2 lg:gap-32">
+        <div className="mt-16 mb-9 grid grid-cols-1 gap-8 lg:grid-cols-2 lg:gap-32">
           <div className="mx-auto max-w-sm lg:max-w-none">
             <Logo />
             <p className="mt-4 text-center  lg:text-left lg:text-lg">
@@ -156,7 +157,7 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="mt-14 border-t  pt-6">
+        <div className=" border-t  pt-6">
           <p className="text-center text-xs/relaxed text-muted-foreground">
             © Company 2022. All rights reserved.
             {/* <br />

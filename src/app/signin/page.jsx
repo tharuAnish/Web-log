@@ -10,7 +10,7 @@ import {
 } from "@/components/ui/card"
 import { FaGithub, FaGoogle } from "react-icons/fa"
 
-export default function Login() {
+export default function Signin() {
   return (
     <div className="min-h-screen flex items-center justify-center ">
       <Card className="w-[380px] shadow">

@@ -70,7 +70,7 @@ export default function CreateBlog() {
   }
 
   return (
-    <div className="container mx-auto p-4  min-h-screen">
+    <div className="container mx-auto p-4 mt-5 min-h-screen">
       <h1 className="text-3xl font-bold mb-6">Create a Blog Post</h1>
       <Tabs defaultValue="write" className="w-full ">
         <TabsList className="mb-5">
@@ -130,7 +130,15 @@ export default function CreateBlog() {
           </Button> */}
         </TabsContent>
         <TabsContent value="preview" className="space-y-4">
-          <h2 className="text-2xl font-bold">{title}</h2>
+          <h2 className="text-2xl font-bold">
+            {title ? (
+              title
+            ) : (
+              <span className="text-muted-foreground font-medium">
+                Write a blog to see the preview ...
+              </span>
+            )}
+          </h2>
           {category && (
             <p className="text-sm text-gray-500">Category: {category}</p>
           )}
