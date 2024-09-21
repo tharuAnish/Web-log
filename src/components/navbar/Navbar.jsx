@@ -7,7 +7,7 @@ import Logo from "./Logo"
 export default function Navbar() {
   return (
     <nav>
-      <div className="flex items-center justify-between  py-3">
+      <div className="flex items-center justify-between  py-4">
         {/* Social Icons */}
         <div className="hidden sm:flex flex-1 gap-2">
           <Image

@@ -1,3 +1,4 @@
+import Link from "next/link"
 import React from "react"
 
 export default function Logo() {
@@ -10,7 +11,7 @@ export default function Logo() {
     )
   }
   return (
-    <div>
+    <Link href="/">
       {/* For smaller screens (before sm) */}
       <div className="flex sm:hidden items-center justify-left gap-1">
         <LetterBox letter="W" />
@@ -30,6 +31,6 @@ export default function Logo() {
           <LetterBox key={index + 3} letter={letter} />
         ))}
       </div>
-    </div>
+    </Link>
   )
 }

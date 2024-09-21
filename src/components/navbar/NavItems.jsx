@@ -45,6 +45,12 @@ export function NavItems() {
       activeIcon: PiHouseFill,
     },
     {
+      name: "Blogs",
+      path: "/blog",
+      icon: PiHouse,
+      activeIcon: PiHouseFill,
+    },
+    {
       name: "Contact",
       path: "/contact",
       icon: PiPhone,
