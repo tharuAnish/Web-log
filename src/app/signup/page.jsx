@@ -14,9 +14,21 @@ import { FaGithub, FaGoogle } from "react-icons/fa"
 import { signIn } from "next-auth/react" // Import signIn from next-auth
 import Link from "next/link"
 
+import { useSession } from "next-auth/react"
+
 export default function Signup() {
+  const { data: session, status } = useSession()
+  if (status === "loading") {
+    return <p>Loading...</p> // Show a loading state while fetching the session
+  }
+
+  if (!session) {
+    return <p>You are not logged in.</p> // User is not authenticated
+  }
   return (
     <div className="min-h-screen flex items-center justify-center ">
+      {/* <p>Welcome, {session.user.name}!</p> 
+      <p>Email: {session.user.email}</p> */}
       <Card className="w-[380px] shadow">
         <CardHeader className="text-center">
           <CardTitle className="text-2xl font-semibold">Welcome !</CardTitle>
@@ -37,7 +49,13 @@ export default function Signup() {
           >
             <FaGithub className="mr-2 h-5 w-5" /> Login with GitHub
           </Button>
-          <Button className="w-full bg-red-500 hover:bg-red-600 text-white">
+          <Button
+            onClick={() => {
+              console.log("Attempting to sign in with Google")
+              signIn("google")
+            }}
+            className="w-full bg-red-500 hover:bg-red-600 text-white"
+          >
             <FaGoogle className="mr-2 h-5 w-5" /> Login with Google
           </Button>
         </CardContent>
