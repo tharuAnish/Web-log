@@ -1,12 +1,18 @@
-import { withAuth } from "next-auth/middleware"
+import { getToken } from "next-auth/jwt"
+import { NextResponse } from "next/server"
 
-export default withAuth({
-  pages: {
-    signIn: "/auth/signin", // Redirect users to this page if not authenticated
-  },
-})
+export async function middleware(req) {
+  const token = await getToken({ req })
 
-// Optional: Specify which routes to apply middleware to
+  // Check if the user is authenticated
+  if (!token) {
+    return NextResponse.redirect(new URL("/auth/signin", req.url))
+  }
+
+  return NextResponse.next()
+}
+
+// Specify which routes to apply middleware to
 export const config = {
-  matcher: ["/dashboard/:path*", "/protected/:path*"], // Add your protected routes here
+  matcher: ["/dashboard/:path*", "/protected/:path*"],
 }

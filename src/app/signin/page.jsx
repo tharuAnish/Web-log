@@ -35,7 +35,7 @@ export default function Signin1() {
           </Button>
         </CardContent>
         <CardFooter className="text-center text-sm text-gray-500">
-          Don't have an account?
+          Don&apos;t have an account?
           <Link href="/signup" className="text-blue-600 ml-1 hover:underline">
             Sign up
           </Link>

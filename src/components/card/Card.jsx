@@ -5,7 +5,7 @@ export default function Card() {
   return (
     <div className=" flex gap-8 items-center">
       <div className="h-[350px] w-[400px] relative  flex-1">
-        <Image src="/p1.jpeg" fill className="object-cover " />
+        <Image src="/p1.jpeg" alt="card-image" fill className="object-cover " />
       </div>
       <div className="flex-1 space-y-4">
         <div className="space-x-4">
