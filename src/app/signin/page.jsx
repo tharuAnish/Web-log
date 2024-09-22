@@ -8,9 +8,10 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
+import Link from "next/link"
 import { FaGithub, FaGoogle } from "react-icons/fa"
 
-export default function Signin() {
+export default function Signin1() {
   return (
     <div className="min-h-screen flex items-center justify-center ">
       <Card className="w-[380px] shadow">
@@ -35,9 +36,9 @@ export default function Signin() {
         </CardContent>
         <CardFooter className="text-center text-sm text-gray-500">
           Don't have an account?
-          <a href="/signup" className="text-blue-600 ml-1 hover:underline">
+          <Link href="/signup" className="text-blue-600 ml-1 hover:underline">
             Sign up
-          </a>
+          </Link>
         </CardFooter>
       </Card>
     </div>
