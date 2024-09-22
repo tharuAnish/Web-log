@@ -3,6 +3,7 @@
 import { useState } from "react"
 import { usePathname } from "next/navigation"
 import Link from "next/link"
+import { signOut, useSession } from "next-auth/react"
 
 import {
   PiHouse,
@@ -11,7 +12,14 @@ import {
   PiPhoneFill,
   PiInfo,
   PiInfoFill,
+  PiTextAlignLeft,
+  PiTextAlignLeftFill,
+  PiSignOut,
+  PiSignOutFill,
+  PiSignIn,
+  PiSignInFill,
 } from "react-icons/pi"
+import { FaRegPenToSquare, FaPenToSquare } from "react-icons/fa6"
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -25,33 +33,35 @@ import AuthLinks from "../authLinks/AuthLinks"
 
 export function NavItems() {
   const pathname = usePathname()
-  const status = "authenticated"
+  // Get the session and status from NextAuth
+  const { data: session, status } = useSession()
+  console.log("Session Data:", session, status)
 
   const navLinks = [
-    ...(status === "authenticated"
-      ? [
-          {
-            name: "Create",
-            path: "/create",
-            icon: PiPhone,
-            activeIcon: PiPhoneFill,
-          },
-        ]
-      : []),
     {
       name: "Home",
       path: "/",
       icon: PiHouse,
       activeIcon: PiHouseFill,
     },
+    ...(status === "authenticated"
+      ? [
+          {
+            name: "Create",
+            path: "/create",
+            icon: FaRegPenToSquare,
+            activeIcon: FaPenToSquare,
+          },
+        ]
+      : []),
     {
-      name: "Blogs",
+      name: "All Blogs",
       path: "/blog",
-      icon: PiHouse,
-      activeIcon: PiHouseFill,
+      icon: PiTextAlignLeft,
+      activeIcon: PiTextAlignLeftFill,
     },
     {
-      name: "Contact",
+      name: "Contactus",
       path: "/contact",
       icon: PiPhone,
       activeIcon: PiPhoneFill,
@@ -62,21 +72,21 @@ export function NavItems() {
       icon: PiInfo,
       activeIcon: PiInfoFill,
     },
-    ...(status === "notauthenticated"
+    ...(status === "authenticated"
       ? [
           {
-            name: "Signin",
-            path: "/signin",
-            icon: PiPhone,
-            activeIcon: PiPhoneFill,
+            name: "Logout",
+            action: signOut,
+            icon: PiSignOut,
+            activeIcon: PiSignOutFill,
           },
         ]
       : [
           {
-            name: "Logout",
-            path: "/logout",
-            icon: PiPhone,
-            activeIcon: PiPhoneFill,
+            name: "Login",
+            path: "/login",
+            icon: PiSignIn,
+            activeIcon: PiSignInFill,
           },
         ]),
   ]
@@ -89,6 +99,22 @@ export function NavItems() {
       {validNavLinks.map((tool) => {
         const isActive = pathname === tool.path
         const Icon = isActive ? tool.activeIcon : tool.icon
+
+        if (tool.name === "Logout") {
+          // Render a button for logout
+          return (
+            <DropdownMenuItem key={tool.name} asChild>
+              <button
+                onClick={() => tool.action()}
+                className="flex px-3 py-2 cursor-pointer text-muted-foreground"
+              >
+                <Icon className="mr-2 h-4 w-4" />
+                {tool.name}
+              </button>
+            </DropdownMenuItem>
+          )
+        }
+
         return (
           <DropdownMenuItem key={tool.name} asChild>
             <Link
@@ -103,13 +129,6 @@ export function NavItems() {
           </DropdownMenuItem>
         )
       })}
-
-      {/* Add AuthLinks here */}
-      {/* <DropdownMenuItem asChild>
-        <div className="px-3 py-2 cursor-pointer text-muted-foreground">
-          <AuthLinks />
-        </div>
-      </DropdownMenuItem> */}
     </div>
   )
 }

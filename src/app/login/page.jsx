@@ -1,5 +1,10 @@
 "use client"
 
+import Link from "next/link"
+import { useRouter } from "next/navigation"
+import { useSession } from "next-auth/react"
+import { signIn } from "next-auth/react"
+
 import Logo from "@/components/footer/Logo"
 import { Button } from "@/components/ui/button"
 import {
@@ -11,19 +16,17 @@ import {
   CardTitle,
 } from "@/components/ui/card"
 import { FaGithub, FaGoogle } from "react-icons/fa"
-import { signIn } from "next-auth/react" // Import signIn from next-auth
-import Link from "next/link"
 
-import { useSession } from "next-auth/react"
-
-export default function Signup() {
+export default function Login() {
   const { data: session, status } = useSession()
+  const router = useRouter()
+
   if (status === "loading") {
     return <p>Loading...</p> // Show a loading state while fetching the session
   }
-
-  if (!session) {
-    return <p>You are not logged in.</p> // User is not authenticated
+  console.log(session, status)
+  if (status === "authenticated") {
+    router.push("/")
   }
   return (
     <div className="min-h-screen flex items-center justify-center ">
