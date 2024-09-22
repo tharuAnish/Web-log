@@ -1,6 +1,6 @@
 "use server"
 
-import { signIn, signOut } from "@/auth"
+import { signIn, signOut } from "@/utils/auth"
 
 //Auth
 export async function loginAction() {
