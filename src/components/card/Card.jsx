@@ -1,9 +1,10 @@
 import Image from "next/image"
 import Link from "next/link"
 
-export default function Card() {
+export default function Card({ post }) {
+  console.log("Post", post)
   return (
-    <div className=" flex gap-8 items-center">
+    <div key={post.id} className=" flex gap-8 items-center">
       <div className="h-[350px] w-[400px] relative  flex-1">
         <Image src="/p1.jpeg" alt="card-image" fill className="object-cover " />
       </div>
@@ -12,13 +13,10 @@ export default function Card() {
           <span className="">20.2024.11 </span>
           <span className="">Travel</span>
         </div>
-        <h1 className="text-3xl font-bold">
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-        </h1>
+        <h1 className="text-3xl font-bold">{post.title}</h1>
         <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi vero
-          voluptates numquam cum sit laboriosam explicabo minima dolores sunt
-          alias! Modi ducimus voluptas quam eum.
+          {post.desc.split(" ").slice(0, 40).join(" ")}
+          {post.desc.split(" ").length > 40 ? " ..." : ""}
         </p>
         <Link href="/">ReadMore ...</Link>
       </div>
