@@ -11,7 +11,7 @@ const CategoryList = async () => {
         {categories?.map((category) => (
           <Link
             key={category.id}
-            href="/blog?cat=style"
+            href={`/blog?cat=${category.slug}`}
             className={`flex items-center flex-1 gap-5 py-3 pl-4 pr-7  bg-slate-200 capitalize   justify-center rounded-lg `}
           >
             <Image

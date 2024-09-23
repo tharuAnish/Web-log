@@ -10,8 +10,8 @@ export default function Card({ post }) {
       </div>
       <div className="flex-1 space-y-4">
         <div className="space-x-4">
-          <span className="">20.2024.11 </span>
-          <span className="">Travel</span>
+          <span className="">{post.createdAt.substring(0, 10)} - </span>
+          <span className="">{post.catSlug}</span>
         </div>
         <h1 className="text-3xl font-bold">{post.title}</h1>
         <p>

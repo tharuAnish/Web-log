@@ -6,6 +6,7 @@ import Menu from "@/components/menu/Menu"
 
 export default function Home({ searchParams }) {
   const page = parseInt(searchParams.page) || 1
+  // const cat = searchParams.cat || ""
   return (
     <div className="">
       <Featured />
