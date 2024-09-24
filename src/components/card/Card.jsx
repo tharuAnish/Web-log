@@ -10,15 +10,15 @@ export default function Card({ post }) {
       </div>
       <div className="flex-1 space-y-4">
         <div className="space-x-4">
-          <span className="">20.2024.11 </span>
-          <span className="">Travel</span>
+          <span className="">{post.createdAt.substring(0, 10)} - </span>
+          <span className="">{post.catSlug}</span>
         </div>
         <h1 className="text-3xl font-bold">{post.title}</h1>
         <p>
           {post.desc.split(" ").slice(0, 40).join(" ")}
           {post.desc.split(" ").length > 40 ? " ..." : ""}
         </p>
-        <Link href="/">ReadMore ...</Link>
+        <Link href={`/blog/${post.slug}`}>ReadMore ...</Link>
       </div>
     </div>
   )

@@ -4,42 +4,32 @@ import { useState } from "react"
 import Image from "next/image"
 import Link from "next/link"
 import { Button } from "../ui/button"
+import useSWR from "swr"
+import { useSession } from "next-auth/react"
 
-export default function CommentSection() {
-  const [comments, setComments] = useState([
-    {
-      id: 1,
-      user: "John Doe",
-      date: "10.03.2023",
-      comment:
-        "This is a mock comment! Loving the post.Consequuntur tempora, repellendus perferendis iusto veritatis reprehenderit! Illum dignissimos ex minus facere nemo provident repellat odit cumque.",
-    },
-    {
-      id: 2,
-      user: "Jane Smith",
-      date: "11.03.2023",
-      comment:
-        "Another comment, very informative. Thanks!, Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta similique ipsum aspernatur quisquam perspiciatis, pariatur quae",
-    },
-  ])
+const fetcher = async (url) => {
+  const res = await fetch(url)
 
-  const [newComment, setNewComment] = useState("")
+  const data = await res.json()
 
-  const status = "authenticated"
-
-  const handlePostComment = () => {
-    if (newComment.trim() === "") return
-
-    const newCommentObj = {
-      id: comments.length + 1,
-      user: "Mock User", // You can replace this with an actual logged-in user's name.
-      date: new Date().toLocaleDateString(),
-      comment: newComment,
-    }
-
-    setComments([...comments, newCommentObj])
-    setNewComment("")
+  if (!res.ok) {
+    const error = new Error(data.message)
+    throw error
   }
+
+  return data
+}
+
+export default function Comments({ postSlug }) {
+  const { status } = useSession()
+
+  const { data, isLoading } = useSWR(
+    `http://localhost:3000/api/comments?postSlug=${postSlug}`,
+    fetcher
+  )
+
+  console.log("CommentData", data)
+  console.log("postSlug", postSlug)
 
   return (
     <div className=" mt-14 ">
@@ -52,12 +42,10 @@ export default function CommentSection() {
               className="w-full p-3 border  rounded-lg focus:outline-none focus:ring-2 focus:ring-muted-foreground"
               rows="3"
               placeholder="Write your comment..."
-              value={newComment}
-              onChange={(e) => setNewComment(e.target.value)}
+              // value={newComment}
+              // onChange={(e) => setNewComment(e.target.value)}
             />
-            <Button className="mt-3 " onClick={handlePostComment}>
-              Post Comment
-            </Button>
+            <Button className="mt-3 ">Post Comment</Button>
           </>
         ) : (
           <Link href="/login" className="">
@@ -68,33 +56,42 @@ export default function CommentSection() {
 
       {/* Display Comments */}
       <div className="space-y-6">
-        {comments.map((comment) => (
-          <div key={comment.id}>
-            <div className="flex gap-4">
-              <div className="relative shrink-0 w-12 h-12">
-                <Image
-                  src="/p1.jpeg"
-                  alt="Post Image 1"
-                  fill
-                  className="rounded-full  object-cover border-2"
-                />
-              </div>
-              <div className="flex-1">
-                <div className="flex items-center justify-between">
-                  <div>
-                    <h3 className="font-bold">{comment.user}</h3>
-                    <p className="text-xs text-muted-foreground">
-                      {comment.date}
-                    </p>
+        {isLoading ? (
+          <p>Loading..</p>
+        ) : (
+          data?.map((comment) => (
+            <div key={comment.id}>
+              <div className="flex gap-4 items-center">
+                <div className="relative shrink-0 w-12 h-12">
+                  <Image
+                    src={comment.user.image}
+                    alt="Post Image 1"
+                    fill
+                    className="rounded-full  object-cover border-2"
+                  />
+                </div>
+                <div className="flex-1">
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <h3 className="font-bold">{comment.user.name}</h3>
+                      <p className="text-xs text-muted-foreground">
+                        {new Date(comment.createdAt).toLocaleDateString(
+                          "en-GB",
+                          {
+                            day: "numeric",
+                            month: "short",
+                            year: "numeric",
+                          }
+                        )}
+                      </p>
+                    </div>
                   </div>
                 </div>
               </div>
+              <p className="mt-2  text-muted-foreground">{comment.desc}</p>
             </div>
-            <p className="mt-2 text-sm text-muted-foreground">
-              {comment.comment}
-            </p>
-          </div>
-        ))}
+          ))
+        )}
       </div>
     </div>
   )
