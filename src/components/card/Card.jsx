@@ -18,7 +18,7 @@ export default function Card({ post }) {
           {post.desc.split(" ").slice(0, 40).join(" ")}
           {post.desc.split(" ").length > 40 ? " ..." : ""}
         </p>
-        <Link href="/">ReadMore ...</Link>
+        <Link href={`/blog/${post.slug}`}>ReadMore ...</Link>
       </div>
     </div>
   )
