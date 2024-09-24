@@ -48,7 +48,7 @@ export default function Blog({ data }) {
           </div>
         </div>
       </div>
-      <Comments />
+      {/* <Comments /> */}
     </main>
   )
 }
