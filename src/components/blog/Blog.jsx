@@ -1,7 +1,6 @@
 import Image from "next/image"
 import { FaTags } from "react-icons/fa6"
 import { MdDateRange } from "react-icons/md"
-import Comments from "../comments/Comments"
 
 export default function Blog({ data }) {
   return (
@@ -23,7 +22,7 @@ export default function Blog({ data }) {
         </div>
         <Image
           className="w-full h-[420px]  object-cover my-9 sm:mt-8 sm:mb-5"
-          src="/p1.jpeg"
+          src={data.img ? data.img : "/p1.jpeg"}
           alt="lorem"
           width={800}
           height={420}
@@ -48,7 +47,6 @@ export default function Blog({ data }) {
           </div>
         </div>
       </div>
-      {/* <Comments /> */}
     </main>
   )
 }

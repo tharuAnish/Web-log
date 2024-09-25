@@ -2,7 +2,9 @@ import Image from "next/image"
 import Link from "next/link"
 
 export default function Card({ post }) {
-  console.log("Post", post)
+  const truncatedDesc =
+    post.desc.split(" ").slice(0, 40).join(" ") +
+    (post.desc.split(" ").length > 40 ? " ..." : "")
   return (
     <div key={post.id} className=" flex gap-8 items-center">
       <div className="h-[350px] w-[400px] relative  flex-1">
@@ -14,10 +16,7 @@ export default function Card({ post }) {
           <span className="">{post.catSlug}</span>
         </div>
         <h1 className="text-3xl font-bold">{post.title}</h1>
-        <p>
-          {post.desc.split(" ").slice(0, 40).join(" ")}
-          {post.desc.split(" ").length > 40 ? " ..." : ""}
-        </p>
+        <p dangerouslySetInnerHTML={{ __html: truncatedDesc }} />
         <Link href={`/blog/${post.slug}`}>ReadMore ...</Link>
       </div>
     </div>

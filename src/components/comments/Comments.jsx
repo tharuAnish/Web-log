@@ -23,13 +23,20 @@ const fetcher = async (url) => {
 export default function Comments({ postSlug }) {
   const { status } = useSession()
 
-  const { data, isLoading } = useSWR(
+  const { data, mutate, isLoading } = useSWR(
     `http://localhost:3000/api/comments?postSlug=${postSlug}`,
     fetcher
   )
 
-  console.log("CommentData", data)
-  console.log("postSlug", postSlug)
+  const [desc, setDesc] = useState("")
+
+  const handleSubmit = async () => {
+    await fetch("/api/comments", {
+      method: "POST",
+      body: JSON.stringify({ desc, postSlug }),
+    })
+    mutate()
+  }
 
   return (
     <div className=" mt-14 ">
@@ -43,9 +50,11 @@ export default function Comments({ postSlug }) {
               rows="3"
               placeholder="Write your comment..."
               // value={newComment}
-              // onChange={(e) => setNewComment(e.target.value)}
+              onChange={(e) => setDesc(e.target.value)}
             />
-            <Button className="mt-3 ">Post Comment</Button>
+            <Button className="mt-3 " onClick={handleSubmit}>
+              Post Comment
+            </Button>
           </>
         ) : (
           <Link href="/login" className="">
