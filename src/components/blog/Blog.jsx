@@ -23,7 +23,7 @@ export default function Blog({ data }) {
         <Image
           className="w-full h-[420px]  object-cover my-9 sm:mt-8 sm:mb-5"
           src={data.img ? data.img : "/p1.jpeg"}
-          alt="lorem"
+          alt="Bg Image"
           width={800}
           height={420}
         />

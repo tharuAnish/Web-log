@@ -28,8 +28,8 @@ const CardList = async ({ page, cat }) => {
 
   return (
     <div className="grid-cols-5 ">
-      <h1 className="text-3xl font-bold my-12">Recent Posts</h1>
-      <div className="space-y-9">
+      <h1 className="text-3xl font-bold mt-14 mb-7">Recent Posts</h1>
+      <div className="flex flex-col gap-y-5">
         {posts?.map((item) => (
           <Card post={item} key={item.id} />
         ))}
