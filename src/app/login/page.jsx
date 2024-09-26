@@ -24,7 +24,7 @@ export default function Login() {
   if (status === "loading") {
     return <p>Loading...</p> // Show a loading state while fetching the session
   }
-  console.log(session, status)
+
   if (status === "authenticated") {
     router.push("/")
   }
