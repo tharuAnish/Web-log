@@ -9,6 +9,7 @@ import {
   FaSquareTwitter,
   FaXTwitter,
 } from "react-icons/fa6"
+import Link from "next/link"
 
 export default function Navbar() {
   return (
@@ -16,9 +17,30 @@ export default function Navbar() {
       <div className="flex items-center justify-between  py-4">
         {/* Social Icons */}
         <div className="hidden sm:flex flex-1 items-center gap-4">
-          <FaLinkedin className="h-5 w-5" />
-          <FaXTwitter className="h-5 w-5" />
-          <FaGlobe className="h-5 w-5" />
+          <Link
+            href="https://www.linkedin.com/in/tharuanish/"
+            target="_blank"
+            rel="noopener noreferrer"
+            passHref
+          >
+            <FaLinkedin className="h-5 w-5" />
+          </Link>
+          <Link
+            href="https://x.com/anish_namo"
+            target="_blank"
+            rel="noopener noreferrer"
+            passHref
+          >
+            <FaXTwitter className="h-5 w-5" />
+          </Link>
+          <Link
+            href="https://tharuanish.vercel.app/#resume"
+            target="_blank"
+            rel="noopener noreferrer"
+            passHref
+          >
+            <FaGlobe className="h-5 w-5" />
+          </Link>
         </div>
 
         <div className="flex-1 text-left sm:text-center text-xl font-bold">

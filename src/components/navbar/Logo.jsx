@@ -5,7 +5,7 @@ export default function Logo() {
   // Define LetterBox component within Navbar
   const LetterBox = ({ letter }) => {
     return (
-      <div className="flex items-center  justify-center bg-black h-8 w-8 rounded-md font-bold text-white">
+      <div className="flex items-center  justify-center dark:bg-white dark:text-black dark:font-extrabold bg-black h-8 w-8 rounded-md font-bold text-white">
         {letter}
       </div>
     )
@@ -20,12 +20,12 @@ export default function Logo() {
       </div>
 
       {/* For sm screens and above */}
-      <div className="hidden sm:flex items-center justify-center gap-1">
+      <div className="hidden sm:flex items-center justify-center gap-1 ">
         {["W", "E", "B"].map((letter, index) => (
           <LetterBox key={index} letter={letter} />
         ))}
 
-        <span className="text-black font-bold">-</span>
+        <span className="text-black font-bold dark:text-white">-</span>
 
         {["L", "O", "G"].map((letter, index) => (
           <LetterBox key={index + 3} letter={letter} />

@@ -34,7 +34,7 @@ const Featured = () => {
               experiences, and stories with a vibrant community eager to
               connect, learn, and be inspired by your creativity.
             </p>
-            <div className="flex gap-3 mt-1">
+            <div className="flex gap-4 mt-1">
               <Link href="/create">
                 <Button>Create New Blog</Button>
               </Link>
