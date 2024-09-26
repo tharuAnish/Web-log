@@ -1,26 +1,46 @@
 import Link from "next/link"
 
-const MenuCategories = () => {
+import { fetchCategories } from "@/action"
+import {
+  FaLaptopCode,
+  FaPlane,
+  FaAppleAlt,
+  FaHeartbeat,
+  FaMoneyBillWave,
+  FaUserFriends,
+} from "react-icons/fa"
+
+// Map of categories to their respective icons
+const categoryIcons = {
+  health: <FaHeartbeat />,
+  lifestyle: <FaUserFriends />,
+  technology: <FaLaptopCode />,
+  travel: <FaPlane />,
+  food: <FaAppleAlt />,
+  finance: <FaMoneyBillWave />,
+}
+
+const MenuCategories = async () => {
+  const categories = await fetchCategories()
   return (
-    <div className="mt-9 mb-14 flex flex-wrap gap-3">
-      <Link href="/blog?cat=style" className="">
-        Style
-      </Link>
-      <Link href="/blog" className="py-2 px-6 bg-slate-300 rounded-lg">
-        Fashion
-      </Link>
-      <Link href="/blog" className="py-2 px-6 bg-yellow-300 rounded-lg">
-        Food
-      </Link>
-      <Link href="/blog" className="py-2 px-6 bg-purple-300 rounded-lg">
-        Travel
-      </Link>
-      <Link href="/blog" className="py-2 px-6 bg-red-300 rounded-lg">
-        Culture
-      </Link>
-      <Link href="/blog" className="py-2 px-6 bg-indigo-300 rounded-lg">
-        Coding
-      </Link>
+    <div>
+      <h2 className="text-sm text-muted-foreground">Discover by topic</h2>
+      <h1 className="text-xl font-bold">Categories</h1>
+
+      <div className="flex flex-wrap gap-2 mt-4">
+        {categories?.map((category) => (
+          <Link
+            key={category.id}
+            href={`/blog?cat=${category.slug}`}
+            className={`flex items-center text-opacity-80 gap-2 py-[6px] pl-4 pr-5 text-secondary-foreground border capitalize rounded-full transition duration-200 hover:bg-secondary`}
+          >
+            <span className="h-6 w-6 flex-shrink-0 flex items-center opacity-70 justify-center">
+              {categoryIcons[category.slug]}
+            </span>
+            <span className=" text-sm">{category.title}</span>
+          </Link>
+        ))}
+      </div>
     </div>
   )
 }

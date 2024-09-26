@@ -1,18 +1,16 @@
-import MenuPosts from "./MenuPosts"
+import MenuPosts from "./MenuTopPosts"
 import MenuCategories from "./MenuCategories"
+import MenuEditorsPick from "./MenuEditorsPick"
+import { Separator } from "../ui/separator"
 
 export default function Menu() {
   return (
-    <div className="grid-cols-2">
-      <h2 className="text-sm text-opacity-90">{"What's hot"}</h2>
-      <h1 className="text-xl font-bold">Most Popular</h1>
-      <MenuPosts withImage={false} />
-      <h2 className="text-sm text-opacity-90">Discover by topic</h2>
-      <h1 className="text-xl font-bold">Categories</h1>
+    <div className="grid-cols-2 space-y-8">
+      <MenuPosts />
+      <Separator className="w-11/12 mx-auto" />
       <MenuCategories />
-      <h2 className="text-sm text-opacity-90">Chosen by the editor</h2>
-      <h1 className="text-xl font-bold">Editors Pick</h1>
-      <MenuPosts withImage={true} />
+      <Separator className="w-11/12 mx-auto" />
+      <MenuEditorsPick />
     </div>
   )
 }
