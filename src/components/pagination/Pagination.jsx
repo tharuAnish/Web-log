@@ -11,7 +11,6 @@ export default function Pagination({ page, hasPrev, hasNext }) {
       <Button
         onClick={() => router.push(`?page=${page - 1}`)}
         disabled={!hasPrev}
-        variant="destructive"
         className="w-24 disabled:cursor-not-allowed"
       >
         Previous
@@ -19,7 +18,6 @@ export default function Pagination({ page, hasPrev, hasNext }) {
       <Button
         onClick={() => router.push(`?page=${page + 1}`)}
         disabled={!hasNext}
-        variant="destructive"
         className="w-24 disabled:cursor-not-allowed"
       >
         Next

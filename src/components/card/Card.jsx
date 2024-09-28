@@ -1,10 +1,11 @@
 import Image from "next/image"
 import Link from "next/link"
-import { CalendarIcon, Tag } from "lucide-react"
 
 import { Badge } from "@/components/ui/badge"
 import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card"
 import { Button } from "../ui/button"
+import { FaRegCalendarCheck, FaTags } from "react-icons/fa6"
+import { Tag } from "lucide-react"
 
 export default function ImprovedCard({ post }) {
   return (
@@ -27,7 +28,7 @@ export default function ImprovedCard({ post }) {
           <CardHeader className="p-0">
             <div className="flex items-center space-x-4 text-xs text-muted-foreground ">
               <span className="flex items-center">
-                <CalendarIcon className="mr-1 h-3 w-3" />
+                <FaRegCalendarCheck className="mr-1 h-3 w-3" />
                 {new Date(post.createdAt).toLocaleDateString("en-GB", {
                   day: "numeric",
                   month: "short",
@@ -51,7 +52,7 @@ export default function ImprovedCard({ post }) {
 
           <CardContent className="p-0">
             <p
-              className="text-muted-foreground text-sm line-clamp-3"
+              className="text-muted-foreground  line-clamp-3"
               dangerouslySetInnerHTML={{ __html: post.desc }}
             />
           </CardContent>
