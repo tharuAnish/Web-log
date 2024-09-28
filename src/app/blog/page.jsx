@@ -10,14 +10,14 @@ export default function Blogs({ searchParams }) {
       {/* <h1 className="mt-11 font-semibold text-3xl w-max pb-2 border-b-4 border-black">
         Blog Lists
       </h1> */}
-      <h1 className="mt-11 capitalize font-semibold text-3xl w-full py-3 text-center bg-primary text-primary-foreground rounded-lg">
+      <h1 className="mt-11 capitalize font-semibold text-3xl w-full py-3 text-center border rounded-lg">
         {cat} Blog
       </h1>
-      <div className="grid grid-cols-7 gap-6">
-        <div className="col-span-5">
+      <div className="grid grid-cols-12 gap-8">
+        <div className="col-span-8 ">
           <CardList page={page} cat={cat} />
         </div>
-        <div className="col-span-2 mt-24">
+        <div className="col-span-4 pl-8  border-l mt-28">
           <Menu />
         </div>
       </div>

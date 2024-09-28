@@ -21,15 +21,15 @@ const CardList = async ({ page, cat }) => {
   const { posts, count } = await getData({ page, cat })
   console.log("Posts_data", posts, "Count", count)
 
-  const POST_PER_PAGE = 2
+  const POST_PER_PAGE = 4
 
   const hasPrev = POST_PER_PAGE * (page - 1) > 0
   const hasNext = POST_PER_PAGE * (page - 1) + POST_PER_PAGE < count
 
   return (
     <div className="grid-cols-5 ">
-      <h1 className="text-3xl font-bold my-12">Recent Posts</h1>
-      <div className="space-y-9">
+      <h1 className="text-3xl font-bold mt-14 mb-7">Recent Posts</h1>
+      <div className="flex flex-col gap-y-7">
         {posts?.map((item) => (
           <Card post={item} key={item.id} />
         ))}

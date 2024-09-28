@@ -21,13 +21,12 @@ export default async function BlogPage({ params }) {
 
   return (
     <div>
-      <h1>Blog </h1>
-      <div className="grid grid-cols-7 gap-2">
-        <div className="col-span-5">
+      <div className="grid mt-5 grid-cols-12 gap-8">
+        <div className="col-span-8 ">
           <Blog data={data} />
           <Comments postSlug={slug} />
         </div>
-        <div className="col-span-2 mt-16">
+        <div className="col-span-4 pl-8  border-l mt-28">
           <Menu />
         </div>
       </div>
