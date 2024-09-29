@@ -3,7 +3,7 @@ import MenuCategories from "./MenuCategories"
 import MenuEditorsPick from "./MenuEditorsPick"
 import { Separator } from "../ui/separator"
 
-export default function Menu() {
+export default function Menu({ page }) {
   return (
     <div className="grid-cols-2 space-y-8">
       <MenuPosts />

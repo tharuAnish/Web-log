@@ -16,7 +16,7 @@ export default function Home({ searchParams }) {
           <CardList page={page} />
         </div>
         <div className="col-span-4 pl-8  border-l mt-28">
-          <Menu />
+          <Menu page={page} />
         </div>
       </div>
     </div>

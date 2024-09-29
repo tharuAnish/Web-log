@@ -35,15 +35,15 @@ export default function ImprovedCard({ post }) {
                   year: "numeric",
                 })}
               </span>
-              <Link href={`/blog?cat=${post.catSlug}`}>
-                <Badge
-                  variant="secondary"
+              <Badge variant="primary">
+                <Link
+                  href={`/blog?cat=${post.catSlug}`}
                   className="flex gap-2 cursor-pointer items-center"
                 >
                   <Tag className=" h-3 w-3" />
                   {post.catSlug}
-                </Badge>
-              </Link>
+                </Link>
+              </Badge>
             </div>
             <h2 className="text-2xl font-bold leading-tight mb-2 line-clamp-2">
               {post.title}
