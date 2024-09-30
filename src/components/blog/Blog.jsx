@@ -3,7 +3,6 @@ import { Badge } from "../ui/badge"
 import Link from "next/link"
 import { FaRegCalendarCheck, FaTag } from "react-icons/fa6"
 import { Tag } from "lucide-react"
-import { Tags } from "lucide-react"
 
 export default function Blog({ data }) {
   return (

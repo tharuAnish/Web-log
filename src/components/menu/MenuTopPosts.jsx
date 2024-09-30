@@ -1,41 +1,28 @@
 import Link from "next/link"
+import { FaRegCalendarCheck, FaRegEye } from "react-icons/fa6"
+import { Badge } from "../ui/badge"
+import { Tag } from "lucide-react"
 
-const MenuTopPosts = () => {
-  // Sample data similar to real posts
-  const posts = [
+// Fetch the top posts sorted by views
+const getTopPosts = async () => {
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_BASE_URL}/api/posts?sortByViews=true`,
     {
-      id: 1,
-      category: "Travel",
-      title: "Sustainable Travel: How to Explore the World Responsibly",
-      author: "Jane Smith",
-      date: "09.15.2023",
-      link: "/post/1",
-    },
-    {
-      id: 2,
-      category: "health",
-      title: "The Importance of Mental Health in Achieving Overall Wellness",
-      author: "Michael Johnson",
-      date: "08.22.2023",
-      link: "/post/2",
-    },
-    {
-      id: 3,
-      category: "Culture",
-      title: "Understanding Japan's Rich Cultural Heritage",
-      author: "Emily Brown",
-      date: "07.10.2023",
-      link: "/post/3",
-    },
-    {
-      id: 4,
-      category: "Fashion",
-      title: "The Rise of Sustainable Fashion in 2023",
-      author: "Chris Wilson",
-      date: "06.25.2023",
-      link: "/post/4",
-    },
-  ]
+      cache: "no-store", // Disable caching
+    }
+  )
+
+  if (!res.ok) {
+    throw new Error("Failed to fetch top posts")
+  }
+
+  return res.json()
+}
+
+const MenuTopPosts = async () => {
+  // try {
+  const { posts } = await getTopPosts() // Fetch top posts from the API
+  console.log("TopPosts", posts)
 
   return (
     <div>
@@ -43,26 +30,47 @@ const MenuTopPosts = () => {
       <h1 className="text-xl font-bold">Most Popular</h1>
       <div className="mt-4 flex flex-col gap-5">
         {posts.map((post) => (
-          <Link
-            href={post.link}
-            key={post.id}
-            className="flex items-center gap-5"
-          >
+          <div key={post.id} className="flex items-center gap-5">
             <div className="flex-4 flex flex-col gap-1">
-              <span className="py-1 text-sm px-4 w-max rounded-full bg-secondary">
-                {post.category}
-              </span>
-              <h3 className="font-bold">{post.title}</h3>
-              <div className="text-opacity-90 text-sm">
-                <span>{post.author}</span>
-                <span> - {post.date}</span>
+              <div className="flex items-center  space-x-4 text-xs text-muted-foreground ">
+                <span className="flex items-center">
+                  <FaRegCalendarCheck className="mr-1 h-3 w-3" />
+                  {new Date(post.createdAt).toLocaleDateString("en-GB", {
+                    day: "numeric",
+                    month: "short",
+                    year: "numeric",
+                  })}
+                </span>
+                <Badge variant="primary">
+                  <Link
+                    href={`/blog?cat=${post.catSlug}`}
+                    className="flex gap-2 items-center"
+                  >
+                    <Tag className=" h-3 w-3" />
+                    {post.catSlug}
+                  </Link>
+                </Badge>
+                <div
+                  variant="primary "
+                  className="flex py-[2px] px-2 border rounded-full items-center gap-1"
+                >
+                  <FaRegEye />
+                  <span>{post.views}</span>
+                </div>
               </div>
+              <Link href={`/post/${post.slug}`}>
+                <h3 className="font-bold hover:underline">{post.title}</h3>
+              </Link>
             </div>
-          </Link>
+          </div>
         ))}
       </div>
     </div>
   )
+  // } catch (error) {
+  //   console.error("Error loading top posts:", error)
+  //   return <p>Failed to load posts</p>
+  // }
 }
 
 export default MenuTopPosts
