@@ -7,6 +7,7 @@ import { FaRegCalendarCheck } from "react-icons/fa6"
 import { Tag } from "lucide-react"
 import EditBlogModal from "./EditBlogModal"
 import { useSession } from "next-auth/react"
+import DeleteBlogButton from "./DeleteBlogButton"
 
 export default function Blog({ data }) {
   const { data: session } = useSession()
@@ -22,6 +23,7 @@ export default function Blog({ data }) {
         <div className="flex gap-6 text-sm text-gray-500 dark:text-gray-400">
           <span className="flex items-center">
             <FaRegCalendarCheck className="mr-1 h-3 w-3" />
+            <DeleteBlogButton slug={data.slug} />
             {new Date(data.createdAt).toLocaleDateString("en-GB", {
               day: "numeric",
               month: "short",

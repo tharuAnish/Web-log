@@ -61,3 +61,59 @@ export const PUT = async (req, { params }) => {
     )
   }
 }
+
+// DELETE a post
+export const DELETE = async (req, { params }) => {
+  try {
+    const session = await auth()
+
+    if (!session) {
+      return new NextResponse(
+        JSON.stringify({ message: "Not Authenticated!" }),
+        { status: 401 }
+      )
+    }
+
+    const { slug } = params
+
+    // Use a transaction to delete comments and then the post
+    const result = await prisma.$transaction(async (prisma) => {
+      // Delete all comments associated with the post
+      await prisma.comment.deleteMany({
+        where: {
+          postSlug: slug,
+        },
+      })
+
+      // Delete the post
+      const deletedPost = await prisma.post.deleteMany({
+        where: {
+          slug: slug,
+          userEmail: session.user.email,
+        },
+      })
+
+      return deletedPost
+    })
+
+    if (result.count === 0) {
+      return new NextResponse(
+        JSON.stringify({
+          message: "Post not found or you're not authorized to delete it.",
+        }),
+        { status: 404 }
+      )
+    }
+
+    return new NextResponse(
+      JSON.stringify({ message: "Post deleted successfully" }),
+      { status: 200 }
+    )
+  } catch (err) {
+    console.error("Error deleting post:", err)
+    return new NextResponse(
+      JSON.stringify({ message: "Something went wrong!", error: err.message }),
+      { status: 500 }
+    )
+  }
+}
