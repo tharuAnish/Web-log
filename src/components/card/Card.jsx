@@ -9,7 +9,7 @@ import { Tag } from "lucide-react"
 
 export default function ImprovedCard({ post }) {
   return (
-    <Card className="h-64 overflow-hidden p-[10px]">
+    <div className="h-64 overflow-hidden p-[10px]">
       <div className="flex gap-3 h-full">
         {/* Image Section */}
         <div className="basis-2/5 h-full ">
@@ -62,6 +62,6 @@ export default function ImprovedCard({ post }) {
           </Button>
         </div>
       </div>
-    </Card>
+    </div>
   )
 }
