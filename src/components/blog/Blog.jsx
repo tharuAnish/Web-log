@@ -18,12 +18,14 @@ export default function Blog({ data }) {
       <div>
         <div className="flex justify-between items-center">
           <h3 className="py-3 text-4xl font-semibold">{data.title}</h3>
-          {isAuthor && <EditBlogModal post={data} />}
+          <div className="flex gap-2">
+            {isAuthor && <EditBlogModal post={data} />}
+            <DeleteBlogButton slug={data.slug} />
+          </div>
         </div>
         <div className="flex gap-6 text-sm text-gray-500 dark:text-gray-400">
           <span className="flex items-center">
             <FaRegCalendarCheck className="mr-1 h-3 w-3" />
-            <DeleteBlogButton slug={data.slug} />
             {new Date(data.createdAt).toLocaleDateString("en-GB", {
               day: "numeric",
               month: "short",
